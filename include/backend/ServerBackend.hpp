@@ -3,11 +3,12 @@
 #include "backend/NsdHost.hpp"
 #include <avahi-common/address.h>
 #include <memory>
+#include <type_traits>
 #include <variant>
 
 class ServerBackend {
 public:
-    ServerBackend(std::variant<AvahiIPv4Address, AvahiIPv6Address> ipAddress);
+    ServerBackend(const AvahiAddress &address);
     ~ServerBackend();
 
     /* Begin hosting the server and make this machine available on the local network */

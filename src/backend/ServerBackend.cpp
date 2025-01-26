@@ -2,10 +2,13 @@
 #include <avahi-common/address.h>
 #include <backend/ServerBackend.hpp>
 #include <memory>
-#include <variant>
 
-ServerBackend::ServerBackend(std::variant<AvahiIPv4Address, AvahiIPv6Address> ipAddress) {
-    m_NsdHost = std::make_unique<NsdHost>(ipAddress);
+ServerBackend::ServerBackend(const AvahiAddress &address) {
+    ServiceInfo serviceInfo{};
+    serviceInfo.serviceName = "TuxControl Server";
+    serviceInfo.serviceID = "_tuxcontrol._tcp";
+
+    m_NsdHost = std::make_unique<NsdHost>(address, serviceInfo);
 }
 
 ServerBackend::~ServerBackend() {

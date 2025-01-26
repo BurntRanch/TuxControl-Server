@@ -16,9 +16,9 @@ endif
 
 NAME		 = TuxControl-Server
 TARGET		 = server
-SRC 	   	 = $(sort $(wildcard src/*.cpp))
+SRC 	   	 = $(sort $(wildcard src/*.cpp) $(wildcard src/backend/*.cpp))
 OBJ 	   	 = $(SRC:.cpp=.o)
-LDFLAGS   	+= 
+LDFLAGS   	+= -lavahi-client -lavahi-common -lfmt
 CXXFLAGS  	?= -mtune=generic -march=native
 CXXFLAGS        += -funroll-all-loops -Iinclude -Wall -std=c++17 $(VARS)
 
